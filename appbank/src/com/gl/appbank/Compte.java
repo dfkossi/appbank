@@ -12,6 +12,7 @@ import java.util.Objects;
  * @author NAT
  */
 public class Compte {
+
     private int numeroCompte;
     private double soldeCompte;
     private double tauxInteret;
@@ -24,9 +25,12 @@ public class Compte {
         this.numeroCompte = numeroCompte;
     }
 
-    
     public int getNumeroCompte() {
         return numeroCompte;
+    }
+
+    public String getNumeroCompteString() {
+        return String.format("%03d", getNumeroCompte());
     }
 
     public void setNumeroCompte(int numeroCompte) {
@@ -99,7 +103,4 @@ public class Compte {
         return "Compte{" + "numeroCompte=" + numeroCompte + ", soldeCompte=" + soldeCompte + ", tauxInteret=" + tauxInteret + ", titulaireCompte=" + titulaireCompte + '}';
     }
 
-   
-    
-    
 }

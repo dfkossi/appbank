@@ -30,6 +30,11 @@ public class AppBankLauncher {
     private static int entree = 0;
 
     public static void main(String[] args) {
+        int yournumber =4;
+        String uu=String.format("%03d", yournumber);
+        System.out.println(" hhh "+uu);
+        int hh= Integer.valueOf(uu);
+         System.out.println(" bbb "+hh);
         accueil();
         menuGenral();
     }
@@ -343,7 +348,7 @@ public class AppBankLauncher {
     private static void listerComptes() {
         System.out.print("\n\n~~~LISTE DES COMPTES~~~\n\n");
         for (Compte cc : listeCompte) {
-            System.out.println("Le numero de compte = " + cc.getNumeroCompte()
+            System.out.println("Le numero de compte = " + cc.getNumeroCompteString()
                     + "; Nom titulaire : " + cc.getTitulaireCompte().getNomTitulaire()
                     + " ; le numero d'identification = " + cc.getTitulaireCompte().getNumeroIdTitulaire()
                     + " ; le montant = " + cc.getSoldeCompte()
@@ -480,7 +485,7 @@ public class AppBankLauncher {
                     case "depot":
                         System.out.println("------- déposer un montant de "
                                 + t.getMontantTransaction() + " Euros pour le compte "
-                                + t.getCompte().getNumeroCompte()
+                                + t.getCompte().getNumeroCompteString()
                                 + " au " + t.getDateTransaction());
 
                         addTransaction(t);
@@ -490,7 +495,7 @@ public class AppBankLauncher {
                     case "retrait":
                         System.out.println("------- retirer un montant de "
                                 + t.getMontantTransaction() + " Euros pour le compte "
-                                + t.getCompte().getNumeroCompte()
+                                + t.getCompte().getNumeroCompteString()
                                 + " au " + t.getDateTransaction());
 
                         if (cc.getSoldeCompte() >= t.getMontantTransaction()) {
@@ -526,7 +531,7 @@ public class AppBankLauncher {
 
                     System.out.println("Nom titulaire : " + cc.getTitulaireCompte().getNomTitulaire()
                             + " ; le numero d'identification = " + cc.getTitulaireCompte().getNumeroIdTitulaire()
-                            + "Le numero de compte = " + cc.getNumeroCompte());
+                            + "Le numero de compte = " + cc.getNumeroCompteString());
                     nbCmpt++;
                 }
             }
@@ -544,7 +549,7 @@ public class AppBankLauncher {
         if (cpt == null) {
             System.out.println("Ce compte n'existe pas");
         } else {
-            System.out.println("Le compte numéro =" + cpt.getNumeroCompte()
+            System.out.println("Le compte numéro =" + cpt.getNumeroCompteString()
                     + "; Titulaire nom= " + cpt.getTitulaireCompte().getNomTitulaire()
                     + "; Solde= " + cpt.getSoldeCompte());
         }
@@ -556,7 +561,7 @@ public class AppBankLauncher {
         System.out.print("\n\n~~~RAPPORT SUR LES COMPTES~~~\n\n");
         for (Compte cc : listeCompte) {
             System.out.println("___________________________________________________________________________________________");
-            System.out.println("Le numero de compte = " + cc.getNumeroCompte()
+            System.out.println("Le numero de compte = " + cc.getNumeroCompteString()
                     + "; Nom titulaire : " + cc.getTitulaireCompte().getNomTitulaire()
                     + " ; solde = " + cc.getSoldeCompte());
             List<Transaction> l = transactionsByCompte(cc.getNumeroCompte());
@@ -579,7 +584,7 @@ public class AppBankLauncher {
         for (Compte cpt : listeCompte) {
            
             cpt.setSoldeCompte(cpt.getSoldeCompte() + cpt.getSoldeCompte() * cpt.getTauxInteret() * 0.01);
-            System.out.println("Le numero de compte = " + cpt.getNumeroCompte()
+            System.out.println("Le numero de compte = " + cpt.getNumeroCompteString()
                     + "; Nom titulaire : " + cpt.getTitulaireCompte().getNomTitulaire()
                     + " ; le numero d'identification = " + cpt.getTitulaireCompte().getNumeroIdTitulaire()
                     + " ; le montant après TI= " + cpt.getSoldeCompte()
