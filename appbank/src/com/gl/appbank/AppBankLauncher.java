@@ -75,9 +75,9 @@ public class AppBankLauncher {
                     break;
                 case 2:
                     entree = 0;
-                    menuTransaction();
+//                    menuTransaction();
                     vericationDeLaSaisie(1, 3);
-                    transactionOptions(entree);
+//                    transactionOptions(entree);
 //                    switch (entree) {
 //                        case 1:
 //                            depotSurCompte();
@@ -97,21 +97,7 @@ public class AppBankLauncher {
                 case 4:
                     listerComptes();
                     break;
-                case 5:
-                    listCompteParTitulaire();
-                    break;
-                case 6:
-                    consulterCompte();
-                    break;
-                case 7:
-                    rapportCompte();
-                    break;
-                case 8:
-                    calculInteret();
-                    break;
-                case 9:
-                    mettreFinAuProgramme();
-                    break;
+                
             }
         }
     }
