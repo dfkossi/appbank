@@ -73,39 +73,15 @@ public class AppBankLauncher {
                     menuCreationCompte();
                     vericationDeLaSaisie(1, 3);
                     createCompteOptions(entree);
-//                    switch (entree) {
-//                        case 1:
-//                            createCompteTitulaireNotExist();
-//                            break;
-//                        case 2:
-//                            createCompteTitulaireExist();
-//                            break;
-//                        case 3:
-//
-//                            System.out.println("\n!!! Action annullee. Retour au menu principal !!!");
-//                            break;
-//                    }
                     break;
                 case 2:
                     entree = 0;
                     menuTransaction();
                     vericationDeLaSaisie(1, 3);
                     transactionOptions(entree);
-//                    switch (entree) {
-//                        case 1:
-//                            depotSurCompte();
-//                            break;
-//                        case 2:
-//                            retraitSurCompte();
-//                            break;
-//                        case 3:
-//                            System.out.println("\n!!! Action annullee. Retour au menu principal !!!");
-//                            break;
-//                    }
                     break;
                 case 3:
                     listerClients();
-//                    entree = 0;
                     break;
                 case 4:
                     listerComptes();
@@ -129,20 +105,11 @@ public class AppBankLauncher {
         }
     }
 
-    //verification du titulaire dans la liste
-//    public static boolean titulaireIsExist(int t) {
-//        for (TitulaireCompte tt : listeTitulaireCompte) {
-//            if (t == tt.getNumeroIdTitulaire()) {
-//                return true;
-//            }
-//
-//        }
-//        return false;
-//    }
+
     private static void accueil() {
         System.out.println("___________________MODULE DE GENIE LOGICIEL AVANCE___________________\n");
-//        System.out.println(" TP1.  MAYABA Solim Wapo\n");
-//        System.out.println("_________________________________________________________________\n\n");
+      System.out.println(" TP1.  MAYABA Solim Wapo & DAGBEGNIKIN Fo Kossi\n");
+      System.out.println("_________________________________________________________________\n\n");
     }
 
     private static void menuPrincipal() {
@@ -150,8 +117,7 @@ public class AppBankLauncher {
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
         System.out.print("1 : CREATION D'UN NOUVEAU COMPTE \n");
         System.out.print("2 : EFFECTUER UNE TRANSACTION SUR UN COMPTE\n");
-//        System.out.print("3 : EFFECTUER UN RETRAIT SUR UN COMPTE\n");
-        System.out.print("3 : LISTE DES CLIENTS\n");
+  System.out.print("3 : LISTE DES CLIENTS\n");
         System.out.print("4 : LISTE DES COMPTES\n");
         System.out.print("5 : RECHERCHER COMPTES D'UN TITULAIRE\n");
         System.out.print("6 : CONSULTER SOLDE D'UN COMPTE\n");
@@ -183,7 +149,7 @@ public class AppBankLauncher {
 
     //Fonction de verification de type 
     private static void verificationTypeDeDonneeNombre(int type) {
-         switch (type) {
+        switch (type) {
             case 1:
                 if (!sc.hasNextInt()) {
                     System.out.print("Veuillez Saisir un nombre entier !!!\n ");
@@ -199,7 +165,7 @@ public class AppBankLauncher {
                 }
                 break;
         }
-       
+
     }
 
     //Fin du programme
@@ -233,8 +199,8 @@ public class AppBankLauncher {
         System.out.print("\n\n~~~CREATION D'UN COMPTE~~~\n\n");
         System.out.print("IDENTIFIANT DU CLIENT : \n");
         verificationTypeDeDonneeNombre(1);
-         int identifiant = sc.nextInt();
-       TitulaireCompte ti = titulaireIsExist(identifiant);
+        int identifiant = sc.nextInt();
+        TitulaireCompte ti = titulaireIsExist(identifiant);
         if (ti != null) {
             System.out.print("_______INFOS TITULAIRE_____ : \n");
             System.out.println("numéro =" + ti.getNumeroIdTitulaire()
@@ -245,11 +211,11 @@ public class AppBankLauncher {
             System.out.print("MONTANT : \n");
             verificationTypeDeDonneeNombre(1);
             double montant = sc.nextDouble();
-            
+
             System.out.print("TAUX D'INTERET : \n");
             verificationTypeDeDonneeNombre(2);
             double taux = sc.nextDouble();
-            
+
 //            int numeroCompte = 001;
             System.out.print("Voulez-vous enregistrer ce compte?\t1 : OUI\t2 : NON\n");
             vericationDeLaSaisie(1, 2);
@@ -287,18 +253,16 @@ public class AppBankLauncher {
         System.out.print("NOM DU CLIENT : \n");
         sc.nextLine();
         String nom = sc.nextLine();
-//        int numeroIdentifiant = 1;    
-        System.out.print("_______INFOS COMPTE_____ : \n");
+ System.out.print("_______INFOS COMPTE_____ : \n");
         System.out.print("MONTANT : \n");
-       verificationTypeDeDonneeNombre(2);
+        verificationTypeDeDonneeNombre(2);
         double montant = sc.nextDouble();
-        
+
         System.out.print("TAUX D'INTERET : \n");
         verificationTypeDeDonneeNombre(2);
-         double taux = sc.nextDouble();
-       
-//        int numeroCompte = 001;
-        System.out.print("Voulez-vous enregistrer ce compte?\t1 : OUI\t2 : NON\n");
+        double taux = sc.nextDouble();
+
+ System.out.print("Voulez-vous enregistrer ce compte?\t1 : OUI\t2 : NON\n");
         vericationDeLaSaisie(1, 2);
         entree = sc.nextInt();
         if (entree == 1) {
@@ -436,8 +400,6 @@ public class AppBankLauncher {
         int numCompte = sc.nextInt();
         double montantTransaction;
         Compte c = compteIsExistt(numCompte);
-        // transaction.setCompte(new Compte(numCompte));
-        // if ( !compteIsExistt(transaction.getCompte())) {
         if (c == null) {
             System.out.println("Ce compte n'existe pas");
             menuTransaction();
@@ -459,11 +421,8 @@ public class AppBankLauncher {
                 transaction.setTypeTransaction(TYPE_DEPOT);
                 updateCompte(transaction);
                 System.out.print("Opération enregistrée\n");
-                // menuGenral();
-
             } else {
                 System.out.print("Opération annulée\n");
-                //menuGenral();
             }
             entree = 0;
 
@@ -477,7 +436,6 @@ public class AppBankLauncher {
         int numCompte = sc.nextInt();
         double montantTransaction;
         Compte c = compteIsExistt(numCompte);
-        //transaction.setCompte(new Compte(numCompte));
         if (c == null) {
             System.out.println("Ce compte n'existe pas");
             menuTransaction();
@@ -498,26 +456,15 @@ public class AppBankLauncher {
                 transaction.setTypeTransaction(TYPE_RETRAIT);
                 updateCompte(transaction);
                 System.out.print("Opération enregistrée\n");
-                // menuGenral();
-
+               
             } else {
                 System.out.print("Opération annulée\n");
-                //menuGenral();
             }
             entree = 0;
 
         }
     }
 
-    //verification du compte dans la liste
-    /* public static boolean compteIsExist(Compte c) {
-        for (Compte cc : listeCompte) {
-            if (cc.getNumeroCompte() == c.getNumeroCompte()) {
-                return true;
-            }
-        }
-        return false;
-    }*/
     //ajout de transaction
     public static void addTransaction(Transaction t) {
         listeTransactions.add(t);
@@ -573,8 +520,7 @@ public class AppBankLauncher {
             System.out.println("numéro =" + ti.getNumeroIdTitulaire()
                     + "nom =" + ti.getNomTitulaire());
 
-//                System.out.println("numero =" + ti.getNumeroIdTitulaire());
-            int nbCmpt = 0;
+ int nbCmpt = 0;
             for (Compte cc : listeCompte) {
                 if (ti.getNumeroIdTitulaire() == cc.getTitulaireCompte().getNumeroIdTitulaire()) {
 
@@ -631,10 +577,7 @@ public class AppBankLauncher {
     public static void calculInteret() {
         System.out.print("\n\n~~~CALCUL D'INTERETS SUR LES COMPTES~~~\n\n");
         for (Compte cpt : listeCompte) {
-            /* double account = cpt.getSoldeCompte() + ((cpt.getSoldeCompte()
-                    * cpt.getTauxInteret()) / 100);
-            cpt.setSoldeCompte(account);
-             */
+           
             cpt.setSoldeCompte(cpt.getSoldeCompte() + cpt.getSoldeCompte() * cpt.getTauxInteret() * 0.01);
             System.out.println("Le numero de compte = " + cpt.getNumeroCompte()
                     + "; Nom titulaire : " + cpt.getTitulaireCompte().getNomTitulaire()
