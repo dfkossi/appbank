@@ -420,6 +420,7 @@ public class AppBankLauncher {
     private static void depotSurCompte() {
         Transaction transaction = new Transaction();
         System.out.println("Entrez le numéro du compte");
+        verificationTypeDeDonneeNombre(1);
         int numCompte = sc.nextInt();
         double montantTransaction;
         Compte c = compteIsExistt(numCompte);
@@ -456,6 +457,7 @@ public class AppBankLauncher {
     private static void retraitSurCompte() {
         Transaction transaction = new Transaction();
         System.out.println("Entrez le numéro du compte");
+        verificationTypeDeDonneeNombre(1);
         int numCompte = sc.nextInt();
         double montantTransaction;
         Compte c = compteIsExistt(numCompte);
@@ -478,7 +480,7 @@ public class AppBankLauncher {
                 transaction.setNumeroTransaction(genererNumeroTransaction());
                 transaction.setTypeTransaction(TYPE_RETRAIT);
                 updateCompte(transaction);
-                System.out.print("Opération enregistrée\n");
+                
 
             } else {
                 System.out.print("Opération annulée\n");
@@ -510,6 +512,7 @@ public class AppBankLauncher {
                         cc.setSoldeCompte(cc.getSoldeCompte()
                                 + t.getMontantTransaction());
                         System.out.print("Opération enregistrée\n");
+                        
                         break;
                     case "retrait":
                         System.out.println("------- retirer un montant de "
