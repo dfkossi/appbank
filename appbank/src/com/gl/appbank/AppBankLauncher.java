@@ -27,16 +27,13 @@ public class AppBankLauncher {
     public static List<Transaction> listeTransactions = new ArrayList<>();
     public static String TYPE_DEPOT = "depot";
     public static String TYPE_RETRAIT = "retrait";
+    public static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd MMMM yyyy", Locale.FRANCE);
+    public static int i = 0;
 
     private static Scanner sc = new Scanner(System.in);
     private static int entree = 0;
 
     public static void main(String[] args) {
-        int yournumber = 4;
-        String uu = String.format("%03d", yournumber);
-        System.out.println(" hhh " + uu);
-        int hh = Integer.valueOf(uu);
-        System.out.println(" bbb " + hh);
         accueil();
         menuGenral();
     }
@@ -348,23 +345,21 @@ public class AppBankLauncher {
     //Afficher la liste des comptes
     private static void listerComptes() {
         System.out.print("\n\n~~~LISTE DES COMPTES~~~\n\n");
-        System.out.print("\n\n~~~LISTE TITULAIRE DES COMPTES~~~\n\n");
         String leftAlignFormat = "| %-9s | %-29s | %-29f | %-29f |%n";
-
         System.out.format("+-----------+-------------------------------+-------------------------------+-------------------------------+%n");
-        System.out.format("| Numero ID |          Nom titulaire        |          Montant              |   Taux d'interet en           |%n");
+        System.out.format("| Numero ID |          Nom titulaire        |          Montant              |         Taux d'interêt        |%n");
         System.out.format("+-----------+-------------------------------+-------------------------------+-------------------------------+%n");
         for (Compte tt : listeCompte) {
-            System.out.format(leftAlignFormat,tt.getNumeroCompteString(),tt.getTitulaireCompte().getNomTitulaire(),tt.getSoldeCompte(),tt.getTauxInteret());
+            System.out.format(leftAlignFormat, tt.getNumeroCompteString(), tt.getTitulaireCompte().getNomTitulaire(), tt.getSoldeCompte(), tt.getTauxInteret());
             System.out.format("|-----------|-------------------------------|-------------------------------|-------------------------------|%n");
         }
-       /* for (Compte cc : listeCompte) {
-            System.out.println("Le numero de compte = " + cc.getNumeroCompteString()
-                    + "; Nom titulaire : " + cc.getTitulaireCompte().getNomTitulaire()
-                    + " ; le numero d'identification = " + cc.getTitulaireCompte().getNumeroIdTitulaire()
-                    + " ; le montant = " + cc.getSoldeCompte()
-                    + " et le taux d'interet = " + cc.getTauxInteret() + "%");
-        }*/
+        /* for (Compte cc : listeCompte) {
+         System.out.println("Le numero de compte = " + cc.getNumeroCompteString()
+         + "; Nom titulaire : " + cc.getTitulaireCompte().getNomTitulaire()
+         + " ; le numero d'identification = " + cc.getTitulaireCompte().getNumeroIdTitulaire()
+         + " ; le montant = " + cc.getSoldeCompte()
+         + " et le taux d'interet = " + cc.getTauxInteret() + "%");
+         }*/
         entree = 0;
     }
 
@@ -377,13 +372,13 @@ public class AppBankLauncher {
         System.out.format("| Numero ID |          Nom titulaire          |%n");
         System.out.format("+-----------+---------------------------------+%n");
         for (TitulaireCompte tt : listeTitulaireCompte) {
-            System.out.format(leftAlignFormat,tt.getNumeroIdTitulaire(),tt.getNomTitulaire());
+            System.out.format(leftAlignFormat, tt.getNumeroIdTitulaire(), tt.getNomTitulaire());
             System.out.format("|-----------|---------------------------------|%n");
         }
         /*for (TitulaireCompte tt : listeTitulaireCompte) {
-            System.out.println("Numero identifiant titulaire : " + tt.getNumeroIdTitulaire()
-                    + ",Nom titulaire : " + tt.getNomTitulaire());
-        }*/
+         System.out.println("Numero identifiant titulaire : " + tt.getNumeroIdTitulaire()
+         + ",Nom titulaire : " + tt.getNomTitulaire());
+         }*/
         entree = 0;
     }
 
@@ -437,7 +432,7 @@ public class AppBankLauncher {
             transaction.setDateTransaction(new Date());
             System.out.println("Montant à déposer");
             montantTransaction = sc.nextDouble();
-            System.out.print("Voulez-vous enregistrer ce compte?\t1 : OUI\t2 : NON\n");
+            System.out.print("Confirmez-vous cet dépot?\t1 : OUI\t2 : NON\n");
             vericationDeLaSaisie(1, 2);
             entree = sc.nextInt();
             if (entree == 1) {
@@ -473,7 +468,7 @@ public class AppBankLauncher {
             transaction.setCompte(c);
             System.out.println("Montant à retirer");
             montantTransaction = sc.nextDouble();
-            System.out.print("Voulez-vous enregistrer ce compte?\t1 : OUI\t2 : NON\n");
+            System.out.print("Confirmez-vous cet retrait?\t1 : OUI\t2 : NON\n");
             vericationDeLaSaisie(1, 2);
             entree = sc.nextInt();
             if (entree == 1) {
@@ -482,7 +477,6 @@ public class AppBankLauncher {
                 transaction.setNumeroTransaction(genererNumeroTransaction());
                 transaction.setTypeTransaction(TYPE_RETRAIT);
                 updateCompte(transaction);
-                
 
             } else {
                 System.out.print("Opération annulée\n");
@@ -508,19 +502,19 @@ public class AppBankLauncher {
                         System.out.println("------- déposer un montant de "
                                 + t.getMontantTransaction() + " Euros pour le compte "
                                 + t.getCompte().getNumeroCompteString()
-                                + " au " + t.getDateTransaction());
+                                + " au " + DATE_FORMAT.format(t.getDateTransaction()));
 
                         addTransaction(t);
                         cc.setSoldeCompte(cc.getSoldeCompte()
                                 + t.getMontantTransaction());
                         System.out.print("Opération enregistrée\n");
-                        
+
                         break;
                     case "retrait":
                         System.out.println("------- retirer un montant de "
                                 + t.getMontantTransaction() + " Euros pour le compte "
                                 + t.getCompte().getNumeroCompteString()
-                                + " au " + t.getDateTransaction());
+                                + " au " + DATE_FORMAT.format(t.getDateTransaction()));
 
                         if (cc.getSoldeCompte() >= t.getMontantTransaction()) {
 
@@ -541,6 +535,7 @@ public class AppBankLauncher {
 
     //Liste de compte par titulaire
     public static void listCompteParTitulaire() {
+        String leftAlignFormat = "| %-29s | %-9s | %-13s |%n";
         System.out.print("\n\n~~~RECHERCHER COMPTES D'UN TITULAIRE ~~~\n\n");
         System.out.println("Entrer le numéro d'identification du titulaire");
         int numeroIDTitulaire = sc.nextInt();
@@ -549,14 +544,15 @@ public class AppBankLauncher {
             System.out.print("_______INFOS TITULAIRE_____ : \n");
             System.out.println("numéro =" + ti.getNumeroIdTitulaire()
                     + "nom =" + ti.getNomTitulaire());
-
+            System.out.format("+-------------------------------+-----------+---------------+%n");
+            System.out.format("|          Nom titulaire        | Numéro ID | Numéro Compte |%n");
+            System.out.format("+-------------------------------+-----------+---------------+%n");
             int nbCmpt = 0;
             for (Compte cc : listeCompte) {
                 if (ti.getNumeroIdTitulaire() == cc.getTitulaireCompte().getNumeroIdTitulaire()) {
-
-                    System.out.println("Nom titulaire : " + cc.getTitulaireCompte().getNomTitulaire()
-                            + " ; le numero d'identification = " + cc.getTitulaireCompte().getNumeroIdTitulaire()
-                            + "Le numero de compte = " + cc.getNumeroCompteString());
+                    System.out.format(leftAlignFormat, cc.getTitulaireCompte().getNomTitulaire(),
+                            cc.getTitulaireCompte().getNumeroIdTitulaire(), cc.getNumeroCompteString());
+                    System.out.format("|-------------------------------|-----------|---------------|%n");
                     nbCmpt++;
                 }
             }
@@ -574,9 +570,13 @@ public class AppBankLauncher {
         if (cpt == null) {
             System.out.println("Ce compte n'existe pas");
         } else {
-            System.out.println("Le compte numéro =" + cpt.getNumeroCompteString()
-                    + "; Titulaire nom= " + cpt.getTitulaireCompte().getNomTitulaire()
-                    + "; Solde= " + cpt.getSoldeCompte());
+            String leftAlignFormat = "| %-13s | %-29s | %-12s |%n";
+            System.out.format("+---------------+-------------------------------+--------------+%n");
+            System.out.format("| Numéro Compte |          Nom titulaire        | Solde Compte |%n");
+            System.out.format("+---------------+-------------------------------+--------------+%n");
+            System.out.format(leftAlignFormat, cpt.getNumeroCompteString(), cpt.getTitulaireCompte().getNomTitulaire(),
+                    cpt.getSoldeCompte());
+            System.out.format("|---------------|-------------------------------|--------------|%n");
         }
 
     }
@@ -584,25 +584,27 @@ public class AppBankLauncher {
     //Rapport comptes
     public static void rapportCompte() {
         System.out.print("\n\n~~~RAPPORT SUR LES COMPTES~~~\n\n");
+        String leftAlignFormat = "| %-13s | %-29s | %-12s |";
+        String leftAlignFormat1 = " %-6s de %-14f le %-16s |%n";
+        String leftAlignFormat2 = " %-45s |%n";
+            System.out.format("+---------------+-------------------------------+--------------+-----------------------------------------------+%n");
+            System.out.format("| Numéro Compte |          Nom titulaire        | Solde Compte |            Transaction sur Compte             |%n");
+            System.out.format("+---------------+-------------------------------+--------------+-----------------------------------------------+%n");
         for (Compte cc : listeCompte) {
-            System.out.println("___________________________________________________________________________________________");
-            System.out.println("Le numero de compte = " + cc.getNumeroCompteString()
-                    + "; Nom titulaire : " + cc.getTitulaireCompte().getNomTitulaire()
-                    + " ; solde = " + cc.getSoldeCompte());
+//            System.out.println("____________________________________________________________________");
+            System.out.format(leftAlignFormat, cc.getNumeroCompteString(), cc.getTitulaireCompte().getNomTitulaire(), 
+                    cc.getSoldeCompte());
             List<Transaction> l = transactionsByCompte(cc.getNumeroCompte());
-            SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd MMMM yyyy", Locale.FRANCE);
-//            DATE_FORMAT.format(listeTransactions.get(i).getDate());
-            int i=0;
+
             if (l != null && !l.isEmpty()) {
                 for (Transaction tr : l) {
-                    System.out.println("Transaction = "
-                            + tr.getTypeTransaction() + " de " 
-                            + tr.getMontantTransaction() + "euros le " 
-                            + DATE_FORMAT.format(l.get(i).getDateTransaction()));
+                    System.out.format(leftAlignFormat1, tr.getTypeTransaction(), tr.getMontantTransaction(), 
+                            DATE_FORMAT.format(l.get(i).getDateTransaction()));
                 }
             } else {
-                System.out.println("Aucune transaction éffectuée");
+                System.out.format(leftAlignFormat2,"Aucune transaction éffectuée");
             }
+            System.out.format("|---------------|-------------------------------|--------------|-----------------------------------------------|%n");
 
         }
 
@@ -611,14 +613,16 @@ public class AppBankLauncher {
     //Calcul intérêt sur compte et update compte
     public static void calculInteret() {
         System.out.print("\n\n~~~CALCUL D'INTERETS SUR LES COMPTES~~~\n\n");
+        String leftAlignFormat = "| %-13s | %-29s | %-9s | %-12f | %-29f |%n";
+            System.out.format("+---------------+-------------------------------+-----------+--------------+-------------------------------+%n");
+            System.out.format("| Numéro Compte |          Nom titulaire        | Numero ID | Solde Compte |        Taux d'interêt         |%n");
+            System.out.format("+---------------+-------------------------------+-----------+--------------+-------------------------------+%n");
         for (Compte cpt : listeCompte) {
 
             cpt.setSoldeCompte(cpt.getSoldeCompte() + cpt.getSoldeCompte() * cpt.getTauxInteret() * 0.01);
-            System.out.println("Le numero de compte = " + cpt.getNumeroCompteString()
-                    + "; Nom titulaire : " + cpt.getTitulaireCompte().getNomTitulaire()
-                    + " ; le numero d'identification = " + cpt.getTitulaireCompte().getNumeroIdTitulaire()
-                    + " ; le montant après TI= " + cpt.getSoldeCompte()
-                    + " et le taux d'interet = " + cpt.getTauxInteret() + "%");
+            System.out.format(leftAlignFormat, cpt.getNumeroCompteString(), cpt.getTitulaireCompte().getNomTitulaire(),
+                    cpt.getTitulaireCompte().getNumeroIdTitulaire(), cpt.getSoldeCompte(), cpt.getTauxInteret());
+            System.out.format("|---------------|-------------------------------|-----------|--------------|-------------------------------|%n");
         }
 
     }
