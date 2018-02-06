@@ -28,6 +28,10 @@ public class TitulaireCompte {
     public int getNumeroIdTitulaire() {
         return numeroIdTitulaire;
     }
+    
+    public String getNumeroIdTitulaireString(){
+        return String.format("%03d", getNumeroIdTitulaire());
+    }
 
     public void setNumeroIdTitulaire(int numeroIdTitulaire) {
         this.numeroIdTitulaire = numeroIdTitulaire;

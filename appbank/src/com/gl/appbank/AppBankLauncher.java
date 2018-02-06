@@ -5,9 +5,11 @@
  */
 package com.gl.appbank;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 
 /**
@@ -29,12 +31,7 @@ public class AppBankLauncher {
     private static Scanner sc = new Scanner(System.in);
     private static int entree = 0;
 
-    public static void main(String[] args) {
-        int yournumber =4;
-        String uu=String.format("%03d", yournumber);
-        System.out.println(" hhh "+uu);
-        int hh= Integer.valueOf(uu);
-         System.out.println(" bbb "+hh);
+    public static void main(String[] args) {        
         accueil();
         menuGenral();
     }
@@ -293,9 +290,9 @@ public class AppBankLauncher {
 
     //Génération automatique du numéro du titulaire
     public static int genererNumeroTitulaire() {
-        int num = 0;
+        int num = 900;
         if (listeTitulaireCompte.isEmpty()) {
-            num = 1;
+            num += 1;
         } else {
             num = listeTitulaireCompte.indexOf(0);
 
@@ -347,12 +344,13 @@ public class AppBankLauncher {
     //Afficher la liste des comptes
     private static void listerComptes() {
         System.out.print("\n\n~~~LISTE DES COMPTES~~~\n\n");
+        System.out.println(" Numéro Compte \t\t Nom titulaire \t\t Numéro titulaire \t\tSolde Compte \t\t Taux Interet");
         for (Compte cc : listeCompte) {
-            System.out.println("Le numero de compte = " + cc.getNumeroCompteString()
-                    + "; Nom titulaire : " + cc.getTitulaireCompte().getNomTitulaire()
-                    + " ; le numero d'identification = " + cc.getTitulaireCompte().getNumeroIdTitulaire()
-                    + " ; le montant = " + cc.getSoldeCompte()
-                    + " et le taux d'interet = " + cc.getTauxInteret() + "%");
+            System.out.println("\t" + cc.getNumeroCompteString()
+                    + "\t\t " + "  " + cc.getTitulaireCompte().getNomTitulaire()
+                    + "\t\t " + "    " + cc.getTitulaireCompte().getNumeroIdTitulaire()
+                    + "\t\t\t " + "  " + cc.getSoldeCompte()
+                    + "\t\t " + "  " + cc.getTauxInteret() + "%");
         }
         entree = 0;
     }
@@ -360,9 +358,10 @@ public class AppBankLauncher {
     //Affiche la liste des clients
     private static void listerClients() {
         System.out.print("\n\n~~~LISTE TITULAIRE DES COMPTES~~~\n\n");
+        System.out.println(" Numéro titulaire \t Nom titulaire");
         for (TitulaireCompte tt : listeTitulaireCompte) {
-            System.out.println("Numero identifiant titulaire : " + tt.getNumeroIdTitulaire()
-                    + ",Nom titulaire : " + tt.getNomTitulaire());
+            System.out.println("\t" + tt.getNumeroIdTitulaire()
+                    + "\t\t " + "  " + tt.getNomTitulaire());
         }
         entree = 0;
     }
@@ -525,7 +524,7 @@ public class AppBankLauncher {
             System.out.println("numéro =" + ti.getNumeroIdTitulaire()
                     + "nom =" + ti.getNomTitulaire());
 
- int nbCmpt = 0;
+            int nbCmpt = 0;
             for (Compte cc : listeCompte) {
                 if (ti.getNumeroIdTitulaire() == cc.getTitulaireCompte().getNumeroIdTitulaire()) {
 
@@ -565,10 +564,15 @@ public class AppBankLauncher {
                     + "; Nom titulaire : " + cc.getTitulaireCompte().getNomTitulaire()
                     + " ; solde = " + cc.getSoldeCompte());
             List<Transaction> l = transactionsByCompte(cc.getNumeroCompte());
+            SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd MMMM yyyy", Locale.FRANCE);
+//            DATE_FORMAT.format(listeTransactions.get(i).getDate());
+            int i=0;
             if (l != null && !l.isEmpty()) {
                 for (Transaction tr : l) {
                     System.out.println("Transaction = "
-                            + tr.getTypeTransaction() + " de " + tr.getMontantTransaction() + "euros le " + tr.getDateTransaction());
+                            + tr.getTypeTransaction() + " de " 
+                            + tr.getMontantTransaction() + "euros le " 
+                            + DATE_FORMAT.format(l.get(i).getDateTransaction()));
                 }
             } else {
                 System.out.println("Aucune transaction éffectuée");
