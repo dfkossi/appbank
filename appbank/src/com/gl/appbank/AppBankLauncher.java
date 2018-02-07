@@ -253,10 +253,15 @@ public class AppBankLauncher {
             double montant = sc.nextDouble();
 
             System.out.print("TAUX D'INTERET : \n");
-            sc.nextDouble();
+//            sc.nextDouble();
             verificationTypeDeDonneeNombre(2);
             double taux = sc.nextDouble();
-
+            while (taux < 0 || taux > 100) {
+                System.out.println("Entrez un numero entre 0 et 100 \n");
+                sc.nextLine();
+                verificationTypeDeDonneeNombre(2);
+                taux = sc.nextDouble();
+            }
 //            int numeroCompte = 001;
             System.out.print("Voulez-vous enregistrer ce compte?\t1 : OUI\t2 "
                     + ": NON\n");
@@ -306,9 +311,9 @@ public class AppBankLauncher {
         double taux = sc.nextDouble();
         while (taux < 0 || taux > 100) {
             System.out.println("Entrez un numero entre 0 et 100 \n");
-             sc.nextLine();
-             verificationTypeDeDonneeNombre(2);
-             taux = sc.nextDouble();
+            sc.nextLine();
+            verificationTypeDeDonneeNombre(2);
+            taux = sc.nextDouble();
         }
         System.out.print("Voulez-vous enregistrer ce compte?\t1 : OUI\t2 :"
                 + " NON\n");
