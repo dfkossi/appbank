@@ -29,8 +29,8 @@ public class AppBankLauncher {
     public static List<Transaction> listeTransactions = new ArrayList<>();
     public static String TYPE_DEPOT = "depot";
     public static String TYPE_RETRAIT = "retrait";
-    public static SimpleDateFormat DATE_FORMAT =
-            new SimpleDateFormat("dd MMMM yyyy", Locale.FRANCE);
+    public static SimpleDateFormat DATE_FORMAT
+            = new SimpleDateFormat("dd MMMM yyyy", Locale.FRANCE);
     public static int i = 0;
 
     private static Scanner sc = new Scanner(System.in);
@@ -142,14 +142,15 @@ public class AppBankLauncher {
     }
 
     //Vérification numéro choix des menus
-    private static void vericationDeLaSaisie(int borneInferieure, 
+    private static void vericationDeLaSaisie(int borneInferieure,
             int borneSuperieure) {
         verificationTypeDeDonnee();
+
         while (entree < borneInferieure || entree > borneSuperieure) {
 
             entree = sc.nextInt();
             if (entree < borneInferieure || entree > borneSuperieure) {
-                System.out.println("Entrez un numero entre " + borneInferieure 
+                System.out.println("Entrez un numero entre " + borneInferieure
                         + " et " + borneSuperieure + "\n");
             }
         }
@@ -184,6 +185,27 @@ public class AppBankLauncher {
         }
 
     }
+
+    //Fonction de verification de type 
+   /* private static void verificationTaux(int borneInferieure,
+            int borneSuperieure) {
+        if (!sc.hasNextDouble()) {
+            System.out.print("Veuillez Saisir un nombre !!!\n ");
+            sc.nextLine();
+            verificationTaux(borneInferieure, borneSuperieure);
+        }
+        else{
+        if (sc.nextDouble() < 0 || sc.nextDouble() > 100) {
+            System.out.println("Entrez un numero entre " + borneInferieure
+                    + " et " + borneSuperieure + "\n");
+            sc.nextLine();
+            verificationTaux(borneInferieure, borneSuperieure);
+        }
+        }
+        
+    
+
+    }*/
 
     //Fin du programme
     private static void mettreFinAuProgramme() {
@@ -232,8 +254,9 @@ public class AppBankLauncher {
             double montant = sc.nextDouble();
 
             System.out.print("TAUX D'INTERET : \n");
+            sc.nextDouble();
             verificationTypeDeDonneeNombre(2);
-            double taux = sc.nextDouble();
+           double taux = sc.nextDouble();
 
 //            int numeroCompte = 001;
             System.out.print("Voulez-vous enregistrer ce compte?\t1 : OUI\t2 "
@@ -372,13 +395,13 @@ public class AppBankLauncher {
                 + "------------------------+-------------------------------+%n");
         for (Compte tt : listeCompte) {
             System.out.format(leftAlignFormat, tt.getNumeroCompteString(),
-                    tt.getTitulaireCompte().getNomTitulaire(), 
+                    tt.getTitulaireCompte().getNomTitulaire(),
                     tt.getSoldeCompte(), tt.getTauxInteret());
             System.out.format("|-----------|-------------------------------|--"
                     + "-----------------------------|-------------------------"
                     + "------|%n");
         }
-      
+
         entree = 0;
     }
 
@@ -396,7 +419,7 @@ public class AppBankLauncher {
             System.out.format("|-----------|-------------------------------"
                     + "--|%n");
         }
-      
+
         entree = 0;
     }
 
@@ -571,17 +594,17 @@ public class AppBankLauncher {
             System.out.println("numéro =" + ti.getNumeroIdTitulaire()
                     + "nom =" + ti.getNomTitulaire());
             System.out.format("+----------------+--------------------+%n");
-            System.out.format(leftAlignFormat1, "nom titulaire compte :" +
-                    ti.getNomTitulaire());
+            System.out.format(leftAlignFormat1, "nom titulaire compte :"
+                    + ti.getNomTitulaire());
             System.out.format("+----------------+--------------------+%n");
             System.out.format("| Numéro ID      | Numéro Compte      |%n");
             System.out.format("+----------------+--------------------+%n");
             int nbCmpt = 0;
             for (Compte cc : listeCompte) {
-                if (ti.getNumeroIdTitulaire() == 
-                        cc.getTitulaireCompte().getNumeroIdTitulaire()) {
+                if (ti.getNumeroIdTitulaire()
+                        == cc.getTitulaireCompte().getNumeroIdTitulaire()) {
                     System.out.format(leftAlignFormat,
-                            cc.getTitulaireCompte().getNumeroIdTitulaire(), 
+                            cc.getTitulaireCompte().getNumeroIdTitulaire(),
                             cc.getNumeroCompteString());
                     System.out.format("|----------------|--------------------|%n");
                     nbCmpt++;
@@ -608,7 +631,7 @@ public class AppBankLauncher {
                     + " Solde Compte |%n");
             System.out.format("+---------------+-------------------------------+"
                     + "--------------+%n");
-            System.out.format(leftAlignFormat, cpt.getNumeroCompteString(), 
+            System.out.format(leftAlignFormat, cpt.getNumeroCompteString(),
                     cpt.getTitulaireCompte().getNomTitulaire(),
                     cpt.getSoldeCompte());
             System.out.format("|---------------|-------------------------------"
@@ -642,8 +665,8 @@ public class AppBankLauncher {
                 int n = 0;
                 for (Transaction tr : l) {
                     if (n == 0) {
-                        System.out.format(leftAlignFormat1, 
-                                tr.getTypeTransaction(), 
+                        System.out.format(leftAlignFormat1,
+                                tr.getTypeTransaction(),
                                 tr.getMontantTransaction(),
                                 DATE_FORMAT.format(l.get(i).getDateTransaction()));
                     } else {
@@ -678,11 +701,11 @@ public class AppBankLauncher {
                 + "-----------+--------------+-------------------------------+%n");
         for (Compte cpt : listeCompte) {
 
-            cpt.setSoldeCompte(cpt.getSoldeCompte() + cpt.getSoldeCompte() *
-                    cpt.getTauxInteret() * 0.01);
+            cpt.setSoldeCompte(cpt.getSoldeCompte() + cpt.getSoldeCompte()
+                    * cpt.getTauxInteret() * 0.01);
             System.out.format(leftAlignFormat, cpt.getNumeroCompteString(),
                     cpt.getTitulaireCompte().getNomTitulaire(),
-                    cpt.getTitulaireCompte().getNumeroIdTitulaire(), 
+                    cpt.getTitulaireCompte().getNumeroIdTitulaire(),
                     cpt.getSoldeCompte(), cpt.getTauxInteret());
             System.out.format("|---------------|-----------------------------"
                     + "--|-----------|--------------|----------------------"
