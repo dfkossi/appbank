@@ -187,7 +187,7 @@ public class AppBankLauncher {
     }
 
     //Fonction de verification de type 
-   /* private static void verificationTaux(int borneInferieure,
+    /* private static void verificationTaux(int borneInferieure,
             int borneSuperieure) {
         if (!sc.hasNextDouble()) {
             System.out.print("Veuillez Saisir un nombre !!!\n ");
@@ -206,7 +206,6 @@ public class AppBankLauncher {
     
 
     }*/
-
     //Fin du programme
     private static void mettreFinAuProgramme() {
         System.out.println("\nFermeture du programme !\n");
@@ -256,7 +255,7 @@ public class AppBankLauncher {
             System.out.print("TAUX D'INTERET : \n");
             sc.nextDouble();
             verificationTypeDeDonneeNombre(2);
-           double taux = sc.nextDouble();
+            double taux = sc.nextDouble();
 
 //            int numeroCompte = 001;
             System.out.print("Voulez-vous enregistrer ce compte?\t1 : OUI\t2 "
@@ -303,8 +302,14 @@ public class AppBankLauncher {
 
         System.out.print("TAUX D'INTERET : \n");
         verificationTypeDeDonneeNombre(2);
-        double taux = sc.nextDouble();
 
+        double taux = sc.nextDouble();
+        while (taux < 0 || taux > 100) {
+            System.out.println("Entrez un numero entre 0 et 100 \n");
+             sc.nextLine();
+             verificationTypeDeDonneeNombre(2);
+             taux = sc.nextDouble();
+        }
         System.out.print("Voulez-vous enregistrer ce compte?\t1 : OUI\t2 :"
                 + " NON\n");
         vericationDeLaSaisie(1, 2);
