@@ -96,7 +96,8 @@ public class Transaction {
         if (this.typeTransaction != other.typeTransaction) {
             return false;
         }
-        if (Double.doubleToLongBits(this.montantTransaction) != Double.doubleToLongBits(other.montantTransaction)) {
+        if (Double.doubleToLongBits(this.montantTransaction) !=
+                Double.doubleToLongBits(other.montantTransaction)) {
             return false;
         }
         if (!Objects.equals(this.dateTransaction, other.dateTransaction)) {
@@ -110,8 +111,10 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return "Transaction{" + "numeroTransaction=" + numeroTransaction + ", dateTransaction=" 
-                + dateTransaction + ", typeTransaction=" + typeTransaction + ", montantTransaction=" 
+        return "Transaction{" + "numeroTransaction=" + numeroTransaction +
+                ", dateTransaction=" 
+                + dateTransaction + ", typeTransaction=" + typeTransaction +
+                ", montantTransaction=" 
                 + montantTransaction + ", compte=" + compte + '}';
     }
 

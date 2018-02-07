@@ -65,8 +65,11 @@ public class Compte {
     public int hashCode() {
         int hash = 7;
         hash = 67 * hash + this.numeroCompte;
-        hash = 67 * hash + (int) (Double.doubleToLongBits(this.soldeCompte) ^ (Double.doubleToLongBits(this.soldeCompte) >>> 32));
-        hash = 67 * hash + (int) (Double.doubleToLongBits(this.tauxInteret) ^ (Double.doubleToLongBits(this.tauxInteret) >>> 32));
+        hash = 67 * hash + 
+                (int) (Double.doubleToLongBits(this.soldeCompte) ^ 
+                (Double.doubleToLongBits(this.soldeCompte) >>> 32));
+        hash = 67 * hash + (int) (Double.doubleToLongBits(this.tauxInteret) ^
+                (Double.doubleToLongBits(this.tauxInteret) >>> 32));
         hash = 67 * hash + Objects.hashCode(this.titulaireCompte);
         return hash;
     }
@@ -86,10 +89,12 @@ public class Compte {
         if (this.numeroCompte != other.numeroCompte) {
             return false;
         }
-        if (Double.doubleToLongBits(this.soldeCompte) != Double.doubleToLongBits(other.soldeCompte)) {
+        if (Double.doubleToLongBits(this.soldeCompte) 
+                != Double.doubleToLongBits(other.soldeCompte)) {
             return false;
         }
-        if (Double.doubleToLongBits(this.tauxInteret) != Double.doubleToLongBits(other.tauxInteret)) {
+        if (Double.doubleToLongBits(this.tauxInteret) != 
+                Double.doubleToLongBits(other.tauxInteret)) {
             return false;
         }
         if (!Objects.equals(this.titulaireCompte, other.titulaireCompte)) {
@@ -100,7 +105,9 @@ public class Compte {
 
     @Override
     public String toString() {
-        return "Compte{" + "numeroCompte=" + numeroCompte + ", soldeCompte=" + soldeCompte + ", tauxInteret=" + tauxInteret + ", titulaireCompte=" + titulaireCompte + '}';
+        return "Compte{" + "numeroCompte=" + numeroCompte + ", soldeCompte=" +
+                soldeCompte + ", tauxInteret=" + tauxInteret +
+                ", titulaireCompte=" + titulaireCompte + '}';
     }
 
 }

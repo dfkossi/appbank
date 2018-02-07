@@ -76,7 +76,8 @@ public class TitulaireCompte {
 
     @Override
     public String toString() {
-        return "TitulaireCompte{" + "numeroIdTitulaire=" + numeroIdTitulaire + ", nomTitulaire=" + nomTitulaire + '}';
+        return "TitulaireCompte{" + "numeroIdTitulaire=" + numeroIdTitulaire + 
+                ", nomTitulaire=" + nomTitulaire + '}';
     }
     
     
